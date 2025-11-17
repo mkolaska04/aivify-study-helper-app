@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+:root {
+    height: 100%;
+}
+
+:root {
+    --primary: #6C73CC;
+    --secondary: #E88D67;
+    --button: #215ff0;
+    --background: #EFF2F9;
+    --surface: #FFFFFF;
+    --success: #2FDB68;
+    --warning: #FF9142;
+    --error: #E3170A;
+    --muted: #808080;
+    --outline: #CBD6E6;
+    --text: #171717;
+    --primary_muted: #b2b6e9;
+    --secondary_muted: #f5b79a;
+    --button_hover: #1b3db9;
+}
+
+.dark {
+    --primary: #7E87EF;
+    --secondary: #E88D67;
+    --button: #215ff0;
+    --background: #0A112B;
+    --surface: #161F3E;
+    --success: #2FDB68;
+    --warning: #FE9C55;
+    --error: #EE382D;
+    --muted: #8086CA;
+    --outline: #404371;
+    --text: #F4F4F4;
+    --primary_muted: #424bc4;
+    --secondary_muted: #b35436;
+    --button_hover: #1b3db9;
+}
+
+/* Flashcard 3D flip animation */
+.perspective {
+    perspective: 1000px;
+}
+
+.transform-style-3d {
+    transform-style: preserve-3d;
+}
+
+.backface-hidden {
+    backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+    transform: rotateY(180deg);
+}
