@@ -2,8 +2,7 @@ import NextAuth from "next-auth"
 import Google from "next-auth/providers/google"
 import { BackendAdapter } from "./lib/backend-adapter"
 
-// Initialize NextAuth handler and export it as GET/POST handlers
-const nextAuthHandler = NextAuth({
+export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: BackendAdapter(),
   providers: [
     Google({
@@ -19,16 +18,9 @@ const nextAuthHandler = NextAuth({
     async session({ session, user }) {
       if (session.user) {
         // extend session.user with id for app usage
-        ;(session.user as any).id = user.id
+        session.user.id = user.id
       }
       return session
     },
   },
 })
-
-export const handlers = {
-  GET: nextAuthHandler,
-  POST: nextAuthHandler,
-}
-
-export default nextAuthHandler
