@@ -37,7 +37,7 @@ ${text}`;
 }
 
 export async function generateQuiz({ text, title, questionCount = 5  }: GenerateQuizParams) {
-  const prompt = `Create a quiz with  multiple-choice questions based on the following text. 
+  const prompt = `Create a quiz with  multiple-choice questions based on the following text. The quiz language should match the language of the original text. 
 For each question provide:
 - The question
 - 4 answer options
@@ -74,7 +74,7 @@ ${text}`;
 }
 
 export async function generateFlashcards({ text, title, cardCount = 10 }: GenerateFlashcardsParams) {
-  const prompt = `Create ${cardCount} flashcards based on the following text. 
+  const prompt = `Create ${cardCount} flashcards based on the following text. The flashcards language should match the language of the original text.
 Each flashcard should have:
 - Front: A question or term
 - Back: The answer or definition
