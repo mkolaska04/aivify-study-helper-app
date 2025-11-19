@@ -1,11 +1,11 @@
-import type { Adapter, VerificationToken } from "next-auth/adapters"
+import type { Adapter, AdapterUser, AdapterAccount, AdapterSession, VerificationToken } from "next-auth/adapters"
 
 // Use localhost for server-side requests (Next.js SSR)
 const API_URL = 'http://localhost:4000';
 
 export function BackendAdapter(): Adapter {
   return {
-    async createUser(user) {
+    async createUser(user: Omit<AdapterUser, "id">): Promise<AdapterUser> {
       const res = await fetch(`${API_URL}/api/auth/user`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -14,7 +14,7 @@ export function BackendAdapter(): Adapter {
       return await res.json();
     },
 
-    async getUser(id) {
+    async getUser(id: string): Promise<AdapterUser | null> {
       try {
         const res = await fetch(`${API_URL}/api/auth/user/${id}`);
         if (!res.ok) return null;
@@ -24,7 +24,7 @@ export function BackendAdapter(): Adapter {
       }
     },
 
-    async getUserByEmail(email) {
+    async getUserByEmail(email: string): Promise<AdapterUser | null> {
       try {
         const res = await fetch(`${API_URL}/api/auth/user/email/${encodeURIComponent(email)}`);
         if (!res.ok) return null;
@@ -34,7 +34,7 @@ export function BackendAdapter(): Adapter {
       }
     },
 
-    async getUserByAccount({ providerAccountId, provider }) {
+    async getUserByAccount({ providerAccountId, provider }: { providerAccountId: string; provider: string }): Promise<AdapterUser | null> {
       try {
         const res = await fetch(`${API_URL}/api/auth/account/${provider}/${providerAccountId}`);
         if (!res.ok) return null;
@@ -45,7 +45,7 @@ export function BackendAdapter(): Adapter {
       }
     },
 
-    async updateUser(user) {
+    async updateUser(user: Partial<AdapterUser> & Pick<AdapterUser, "id">): Promise<AdapterUser> {
       const res = await fetch(`${API_URL}/api/auth/user`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -54,7 +54,7 @@ export function BackendAdapter(): Adapter {
       return await res.json();
     },
 
-    async linkAccount(account) {
+    async linkAccount(account: AdapterAccount): Promise<AdapterAccount | null | undefined> {
       const res = await fetch(`${API_URL}/api/auth/account`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -63,7 +63,7 @@ export function BackendAdapter(): Adapter {
       return await res.json();
     },
 
-    async createSession(session) {
+    async createSession(session: { sessionToken: string; userId: string; expires: Date }): Promise<AdapterSession> {
       const res = await fetch(`${API_URL}/api/auth/session`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -81,7 +81,7 @@ export function BackendAdapter(): Adapter {
       };
     },
 
-    async getSessionAndUser(sessionToken) {
+    async getSessionAndUser(sessionToken: string): Promise<{ session: AdapterSession; user: AdapterUser } | null> {
       try {
         const res = await fetch(`${API_URL}/api/auth/session/${sessionToken}`);
         if (!res.ok) return null;
@@ -105,7 +105,7 @@ export function BackendAdapter(): Adapter {
       }
     },
 
-    async updateSession(session) {
+    async updateSession(session: Partial<AdapterSession> & Pick<AdapterSession, "sessionToken">): Promise<AdapterSession | null | undefined> {
       const res = await fetch(`${API_URL}/api/auth/session/${session.sessionToken}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -122,18 +122,18 @@ export function BackendAdapter(): Adapter {
       };
     },
 
-    async deleteSession(sessionToken) {
+    async deleteSession(sessionToken: string): Promise<void> {
       await fetch(`${API_URL}/api/auth/session/${sessionToken}`, {
         method: 'DELETE',
       });
     },
 
-    async createVerificationToken(token) {
+    async createVerificationToken(token: VerificationToken): Promise<VerificationToken | null | undefined> {
       // Not implemented for OAuth
       return token as VerificationToken;
     },
 
-    async useVerificationToken() {
+    async useVerificationToken(_params: { identifier: string; token: string }): Promise<VerificationToken | null> {
       // Not implemented for OAuth
       return null;
     },

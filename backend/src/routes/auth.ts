@@ -6,7 +6,10 @@ const router = Router();
 // Get user by email
 router.get('/user/email/:email', async (req: Request, res: Response) => {
   try {
-    const { email } = req.params;
+    const email = req.params.email;
+    if (!email) {
+      return res.status(400).json({ error: 'Email is required' });
+    }
     const user = await prisma.user.findUnique({
       where: { email },
       include: {
@@ -24,7 +27,10 @@ router.get('/user/email/:email', async (req: Request, res: Response) => {
 // Get user by id
 router.get('/user/id/:id', async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
+    const id = req.params.id;
+    if (!id) {
+      return res.status(400).json({ error: 'ID is required' });
+    }
     const user = await prisma.user.findUnique({
       where: { id },
       include: {
@@ -61,7 +67,10 @@ router.post('/user', async (req: Request, res: Response) => {
 // Update user
 router.put('/user/:id', async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
+    const id = req.params.id;
+    if (!id) {
+      return res.status(400).json({ error: 'ID is required' });
+    }
     const { email, name, image, emailVerified } = req.body;
     const user = await prisma.user.update({
       where: { id },
@@ -82,7 +91,10 @@ router.put('/user/:id', async (req: Request, res: Response) => {
 // Delete user
 router.delete('/user/:id', async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
+    const id = req.params.id;
+    if (!id) {
+      return res.status(400).json({ error: 'ID is required' });
+    }
     await prisma.user.delete({
       where: { id },
     });
@@ -96,7 +108,10 @@ router.delete('/user/:id', async (req: Request, res: Response) => {
 // Get session and user
 router.get('/session/:sessionToken', async (req: Request, res: Response) => {
   try {
-    const { sessionToken } = req.params;
+    const sessionToken = req.params.sessionToken;
+    if (!sessionToken) {
+      return res.status(400).json({ error: 'Session token is required' });
+    }
     const session = await prisma.session.findUnique({
       where: { sessionToken },
       include: {
@@ -131,7 +146,10 @@ router.post('/session', async (req: Request, res: Response) => {
 // Update session
 router.put('/session/:sessionToken', async (req: Request, res: Response) => {
   try {
-    const { sessionToken } = req.params;
+    const sessionToken = req.params.sessionToken;
+    if (!sessionToken) {
+      return res.status(400).json({ error: 'Session token is required' });
+    }
     const { expires } = req.body;
     const session = await prisma.session.update({
       where: { sessionToken },
@@ -149,7 +167,10 @@ router.put('/session/:sessionToken', async (req: Request, res: Response) => {
 // Delete session
 router.delete('/session/:sessionToken', async (req: Request, res: Response) => {
   try {
-    const { sessionToken } = req.params;
+    const sessionToken = req.params.sessionToken;
+    if (!sessionToken) {
+      return res.status(400).json({ error: 'Session token is required' });
+    }
     await prisma.session.delete({
       where: { sessionToken },
     });
@@ -188,7 +209,11 @@ router.post('/account', async (req: Request, res: Response) => {
 // Get account
 router.get('/account/:provider/:providerAccountId', async (req: Request, res: Response) => {
   try {
-    const { provider, providerAccountId } = req.params;
+    const provider = req.params.provider;
+    const providerAccountId = req.params.providerAccountId;
+    if (!provider || !providerAccountId) {
+      return res.status(400).json({ error: 'Provider and providerAccountId are required' });
+    }
     const account = await prisma.account.findUnique({
       where: {
         provider_providerAccountId: {
