@@ -1,7 +1,7 @@
 import type { Adapter, AdapterUser, AdapterAccount, AdapterSession, VerificationToken } from "next-auth/adapters"
 
-// Use localhost for server-side requests (Next.js SSR)
-const API_URL = 'http://localhost:4000';
+// Use backend URL from environment variable
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
 
 export function BackendAdapter(): Adapter {
   return {
