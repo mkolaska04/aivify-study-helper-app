@@ -220,7 +220,7 @@ export default function QuizPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-4xl">
+    <div className="container mx-auto px-4 py-14 max-w-4xl">
       <div className="mb-6">
         <Link href="/quizzes" className="text-button hover:underline mb-4 inline-block">
           ← Back to all quizzes

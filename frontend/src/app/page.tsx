@@ -9,8 +9,8 @@ export default function Home() {
   const router = useRouter();
 
   return (
-    <div className="min-h-screen">
-      <main className="container mx-auto px-4 py-12">
+    <div >
+      <main className="container mx-auto px-4 py-8">
         <div className="text-center mb-8">
           <div className="flex justify-end mb-4">
           </div>
@@ -29,19 +29,19 @@ export default function Home() {
               <div className="flex justify-center gap-4 flex-wrap">
                 <button
                   onClick={() => router.push("/add-new")}
-                  className="bg-primary text-white px-6 py-3 rounded-md hover:bg-primary/90 transition-colors"
+                  className="bg-primary text-white px-6 py-3 rounded-md hover:bg-primary_muted transition-colors"
                 >
                   Create New Study Material
                 </button>
                 <button
                   onClick={() => router.push("/summaries")}
-                  className="bg-secondary text-white px-6 py-3 rounded-md hover:bg-secondary/90 transition-colors"
+                  className="bg-secondary text-white px-6 py-3 rounded-md hover:bg-secondary_muted transition-colors"
                 >
                   View Summaries
                 </button>
                 <button
                   onClick={() => router.push("/quizzes")}
-                  className="bg-secondary text-white px-6 py-3 rounded-md hover:bg-secondary/90 transition-colors"
+                  className="bg-secondary text-white px-6 py-3 rounded-md hover:bg-secondary_muted transition-colors"
                 >
                   Take a Quiz
                 </button>
