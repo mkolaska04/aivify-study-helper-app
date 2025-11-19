@@ -19,6 +19,25 @@ export default function SummaryPage() {
     const [summary, setSummary] = useState<Summary | null>(null);
     const [loading, setLoading] = useState(true);
 
+    const handleDelete = async (summaryId: string) => {
+        const confirmed = window.confirm('Are you sure you want to delete this summary? This action cannot be undone.');
+        if (!confirmed) return;
+
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/study/summaries/${summaryId}`, {
+                method: 'DELETE',
+            });
+
+            if (response.ok) {
+                window.location.href = '/summaries';
+            } else {
+                console.error('Failed to delete summary');
+            }
+        } catch (error) {
+            console.error('Error deleting summary:', error);
+        }
+    }
+
     useEffect(() => {
         const fetchSummary = async () => {
             try {
@@ -64,7 +83,11 @@ export default function SummaryPage() {
                 <Link href="/summaries" className="text-secondary hover:underline mb-4 inline-block">
                     ← Back to all summaries
                 </Link>
-                <h1 className="text-3xl font-bold mb-2">{summary.title}</h1>
+                <div className="flex gap-2 items-center">
+                    <h1 className="text-3xl font-bold mb-2">{summary.title}</h1>
+                    <button onClick={() => handleDelete(summary.id)} className="px-4 py-2 bg-error text-white rounded-md hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed">Delete</button>
+                </div>
+
                 <div className="text-sm text-muted">
                     <p>Source: {summary.sourceType}</p>
                     <p>Created: {new Date(summary.createdAt).toLocaleDateString()}</p>

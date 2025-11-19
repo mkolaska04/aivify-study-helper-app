@@ -27,6 +27,24 @@ export default function FlashcardSetPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
   const [loading, setLoading] = useState(true);
+  const handleDelete = async (setId: string) => {
+    const confirmed = window.confirm('Are you sure you want to delete this flashcard set? This action cannot be undone.');
+    if (!confirmed) return;
+
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/study/flashcards/${setId}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        window.location.href = '/flashcards';
+      } else {
+        console.error('Failed to delete flashcard set');
+      }
+    } catch (error) {
+      console.error('Error deleting flashcard set:', error);
+    }
+  }
 
   useEffect(() => {
     const loadFlashcardSet = async () => {
@@ -93,7 +111,11 @@ export default function FlashcardSetPage() {
         <Link href="/flashcards" className="text-button hover:underline mb-4 inline-block">
           ← Back to all flashcards
         </Link>
+        <div className="flex gap-2 items-center">
         <h1 className="text-3xl font-bold mb-2 text-primary">{flashcardSet.title}</h1>
+
+          <button onClick={() => handleDelete(flashcardSet.id)} className="px-4 py-2 bg-error text-white rounded-md hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed">Delete</button>
+        </div>
         <p className="text-secondary">
           Card {currentIndex + 1} of {flashcardSet.flashcards.length}
         </p>

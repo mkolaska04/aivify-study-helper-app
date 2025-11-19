@@ -285,6 +285,7 @@ router.get('/summaries/:id', async (req: Request, res: Response) => {
   }
 });
 
+
 // GET user's quizzes
 router.get('/quizzes/user/:userId', async (req: Request, res: Response) => {
   try {
