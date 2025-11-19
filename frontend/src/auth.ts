@@ -1,11 +1,11 @@
-import NextAuth from "next-auth"
-import Google from "next-auth/providers/google"
+import NextAuth, { NextAuthOptions } from "next-auth"
+import GoogleProvider from "next-auth/providers/google"
 import { BackendAdapter } from "./lib/backend-adapter"
 
-export const { handlers, signIn, signOut, auth } = NextAuth({
+export const authOptions: NextAuthOptions = {
   adapter: BackendAdapter(),
   providers: [
-    Google({
+    GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
@@ -23,4 +23,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return session
     },
   },
-})
+}
+
+const handler = NextAuth(authOptions)
+
+export { handler as GET, handler as POST }
