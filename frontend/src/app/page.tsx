@@ -2,6 +2,7 @@
 
 import { useSession, signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import RunningWithErrorsIcon from '@mui/icons-material/RunningWithErrors';
 
 export default function Home() {
   const { data: session } = useSession();
@@ -20,6 +21,15 @@ export default function Home() {
           <p className="text-xl text-muted mb-8">
             Your AI-powered study helper
           </p>
+
+
+          <div className="text-md bg-surface text-text border border-warning mb-8 px-4 py-3 rounded-md inline-block flex items-center justify-center w-fit mx-auto">
+           
+              Keep in mind that the app is deployed on a free-tier hosting
+              service, so the initial loading time might be a bit longer
+              than usual.
+              <RunningWithErrorsIcon fontSize="large" className="ml-2 text-warning" />
+          </div>
           
           {user ? (
             <div className="space-y-4">
