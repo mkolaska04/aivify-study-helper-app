@@ -25,6 +25,7 @@ export default function NavBar() {
                         <div className="flex items-between justify-between w-full">
                             <button onClick={() => setIsMenuOpen(!isMenuOpen)}><MenuIcon /></button> 
                              <div className="flex items-center gap-4">
+                                Aivify
                         {!isLoading && (
                             user ? (
                                 <>
@@ -61,6 +62,7 @@ export default function NavBar() {
                         </div>
                        
                         <div className={`${isMenuOpen ? 'block' : 'hidden'} mt-2 bg-surface p-4 rounded-md shadow-md`}>
+                            Aivify
                              <li 
                             onClick={() => {router.push("/"); setIsMenuOpen(false);}} 
                             className="cursor-pointer hover:text-primary transition-colors font-semibold"
@@ -103,6 +105,7 @@ export default function NavBar() {
                         
                     </div>
                     <div className=" hidden lg:flex items-center gap-6">
+                        <h1>Aivify</h1>
                         <li 
                             onClick={() => router.push("/")} 
                             className="cursor-pointer hover:text-primary transition-colors font-semibold"

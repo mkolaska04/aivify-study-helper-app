@@ -86,7 +86,7 @@ export default function FlashcardSetPage() {
 
   if (loading) {
     return (
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 lg:py-16">
         <p>Loading flashcards...</p>
       </div>
     );
@@ -94,7 +94,7 @@ export default function FlashcardSetPage() {
 
   if (!flashcardSet) {
     return (
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 lg:py-16">
         <p>Flashcard set not found.</p>
         <Link href="/flashcards" className="text-primary hover:underline">
           Back to flashcards
@@ -106,7 +106,7 @@ export default function FlashcardSetPage() {
   const currentCard = flashcardSet.flashcards[currentIndex];
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-4xl">
+    <div className="container mx-auto px-4 py-8 max-w-4xl lg:py-16">
       <div className="mb-6">
         <Link href="/flashcards" className="text-button hover:underline mb-4 inline-block">
           ← Back to all flashcards

@@ -39,14 +39,14 @@ export default function SummariesPage() {
 
   if (loading) {
     return (
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 lg:py-12">
         <p>Loading summaries...</p>
       </div>
     );
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 lg:py-16">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold">My Summaries</h1>
         <Link

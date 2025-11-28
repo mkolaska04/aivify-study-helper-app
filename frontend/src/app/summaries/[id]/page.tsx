@@ -68,7 +68,7 @@ export default function SummaryPage() {
 
     if (!summary) {
         return (
-            <div className="container mx-auto px-4 py-8">
+            <div className="container mx-auto px-4 py-8 lg:py-12">
                 <p>Summary not found.</p>
                 <Link href="/summaries" className="text-secondary hover:underline">
                     Back to summaries
@@ -78,7 +78,7 @@ export default function SummaryPage() {
     }
 
     return (
-        <div className="container mx-auto px-4 py-8 max-w-4xl">
+        <div className="container mx-auto px-4 py-8 max-w-4xl lg:py-16">
             <div className="mb-6">
                 <Link href="/summaries" className="text-secondary hover:underline mb-4 inline-block">
                     ← Back to all summaries

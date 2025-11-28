@@ -130,7 +130,7 @@ export default function QuizPage() {
 
   if (loading) {
     return (
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 lg:py-16">
         <p>Loading quiz...</p>
       </div>
     );
@@ -138,7 +138,7 @@ export default function QuizPage() {
 
   if (!quiz) {
     return (
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 lg:py-16">
         <p>Quiz not found.</p>
         <Link href="/quizzes" className="text-button hover:underline">
           Back to quizzes
